@@ -1,0 +1,31 @@
+.custom-toast-success {
+  background-color: green !important;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-toast-error {
+  background-color: red !important;
+  color: white;
+  text-align: center;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.toast {
+  width: auto;
+  min-width: 200px;
+  margin: 10px 0;
+}

@@ -1,0 +1,41 @@
+<div class="todo-list" (scroll)="onScroll()">
+  <div *ngFor="let todo of todos" class="todo-item">
+    <input 
+      type="checkbox" 
+      [checked]="todo.checked" 
+      (change)="toggleTodoCompletion(todo)" 
+    />
+
+    <ng-container *ngIf="todo.isEditing; else displayTodo">
+      <input 
+        type="text" 
+        class="edit-input" 
+        [(ngModel)]="todo.title" 
+        (blur)="stopEditing(todo)" 
+        (keydown.enter)="stopEditing(todo)" 
+        placeholder="Edit title"
+        [ngClass]="{'error': !todo.title.trim() && todo.isEditing}"
+      />
+      <div class="description-container">
+        <input 
+          type="text" 
+          class="edit-input" 
+          [(ngModel)]="todo.taskDesc" 
+          (blur)="stopEditing(todo)" 
+          (keydown.enter)="stopEditing(todo)" 
+          placeholder="Edit description"
+        />
+      </div>
+      <div *ngIf="!todo.title.trim() && todo.isEditing" class="error-message">
+        Title cannot be empty.
+      </div>
+    </ng-container>
+
+    <ng-template #displayTodo>
+      <h3 (dblclick)="startEditing(todo)">{{ todo.title }}</h3>
+      <p (dblclick)="startEditing(todo)" class="description">{{ todo.taskDesc }}</p>
+    </ng-template>
+
+    <button class="delete-button" (click)="deleteTodo(todo)">✖</button>
+  </div>
+</div>

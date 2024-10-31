@@ -1,0 +1,13 @@
+<div class="todo-form">
+  <h2>{{ todo ? 'Edit Todo' : 'Add Todo' }}</h2>
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input id="title" [(ngModel)]="title" type="text" required />
+  </div>
+  <div class="form-group">
+    <label for="taskDesc">Description:</label>
+    <textarea id="taskDesc" [(ngModel)]="taskDesc" required></textarea>
+  </div>
+  <button (click)="onSave()">Save</button>
+  <button (click)="onClose()">Cancel</button>
+</div>

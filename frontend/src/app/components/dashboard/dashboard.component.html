@@ -1,0 +1,45 @@
+<div class="dashboard" [class.fade]="fadeDashboard">
+  <h1>Hello, {{ userName }}</h1>
+  
+  <button class="logout-button" (click)="logout()">Logout</button>
+  
+  <h5 class="task-summary">
+    Total Task: {{ totalTask }} || 
+    Remaining Task: {{ remainingTask }} || 
+    Completed Task: {{ completedTask }}
+  </h5>  
+
+  <div class="search-bar-container" *ngIf="!isTodoFormVisible">
+    <button (click)="openTodoForm()" class="add-todo-button">Add Todo</button>
+    <input 
+      type="text" 
+      [(ngModel)]="searchTerm" 
+      placeholder="Search todos" 
+      class="search-bar"
+    />
+  </div>
+
+  <ng-container *ngIf="isTodoFormVisible; else todoListTemplate">
+    <app-todo-form (todoAdded)="addTodo($event)" (close)="closeTodoForm()"></app-todo-form>
+  </ng-container>
+
+  <ng-template #todoListTemplate>
+    <h2>Remaining Todos</h2>
+    <app-todo-list 
+      [todos]="filterTodos()" 
+      (scroll)="onRemainingTodoScroll()"
+      (todoClicked)="openTodoModal($event)"
+      (todoToggled)="handleTodoToggle($event)"
+      (todoDeleted)="deleteTodo($event)">
+    </app-todo-list>
+
+    <h2>Completed Todos</h2>
+    <app-todo-list 
+      [todos]="completedTodos" 
+      (scroll)="onCompletedScroll()"
+      (todoClicked)="openTodoModal($event)"
+      (todoToggled)="handleTodoToggle($event)"
+      (todoDeleted)="deleteTodo($event)">
+    </app-todo-list>
+  </ng-template>
+</div>
